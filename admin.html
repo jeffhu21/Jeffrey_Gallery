@@ -1,0 +1,126 @@
+<!--
+Login form for admin and manager
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title> Admin </title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body { font-family: sans-serif;
+           font-size:15px;}
+
+    #display_msg
+    {
+
+      color:red;
+    }
+
+    .container
+    {
+      position:relative;
+      width:500px;
+      height:200px;
+      top:50px;
+      left:30%;
+      padding-top: 20px;
+      /*padding-top: 20px;
+      padding-left: 200px;*/
+      background-color: #909090;
+      text-align: center;
+    }
+
+    .close
+    {
+      position: absolute;
+      right: 0;
+      top: 0;
+      font-size: 30px;
+      font-weight: bold;
+      color: black;
+    }
+
+    .close:hover, .close:focus
+    {
+      color: red;
+      cursor: pointer;
+    }
+
+    .forgot
+    {
+      position:absolute;
+      right: 5px;
+      bottom: 10px;
+    }
+
+    .login_btn
+    {
+      position:absolute;
+      left: 50%;
+    }
+
+/*
+    .forgot::after
+    {
+      clear:both;
+    }
+*/
+  </style>
+</head>
+<body>
+
+  <div id="modal01" class="container">
+      <span class="close" title="Close Modal" onclick="closeButton()">&times;</span>
+
+      <form method="post" action="admin.php">
+
+        <h3>Sign In</h3>
+
+        <p id="display_msg">Please sign in.</p>
+
+        <p> <label for="username">Username: <input type = "text" id="signin_username" name="a_name" placeholder="Enter Username" required> </label></p>
+
+        <p> <label for="pwd">Password: <input type = "password" id="signin_pwd" name="a_pwd" placeholder = "Enter Password" required> </label> </p>
+
+        <p>
+          <span class="forgot"> <a style="color:black">Forgot password?</a> </span>
+        </p>
+
+        <p> <input type="submit" class="login_btn" name="login" value="OK"></p>
+
+      </form>
+  </div>
+
+<script>
+  function closeButton()
+  {
+    document.getElementById("modal01").style.display='none';
+  }
+
+  function login()
+  {
+    var xhttp = new XMLHttpRequest();
+
+    var username = document.getElementById('signin_username').value;
+    var password = document.getElementById('signin_pwd').value;
+
+    //document.getElementById("display_msg").innerHTML="Bosco";
+
+    xhttp.onreadystatechange = function()
+    {
+      if(this.readyState == 4 && this.status === 200)
+      {
+        document.getElementById("display_msg").innerHTML+=this.responseText;
+      }
+    };
+    xhttp.open("GET","login.php?username=" + username + "&password=" + password,true);
+    xhttp.send();
+  }
+
+</script>
+
+
+
+</body>
+</html>

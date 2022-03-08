@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> Login Form </title>
+  <meta charset="utf-8">
+  <style>
+  table,th,td
+  {
+  border : 2px solid black;
+  border-collapse: collapse;
+  }
+  body { font-family: sans-serif;}
+
+  .login-form,.create-form,.reset-form
+  {
+    position:relative;
+    width: 50%;
+    height: 100%;
+    left: 25%;
+    text-align: center;
+    padding-bottom: 10px;
+
+    display: block;
+    background-color: grey;
+    /*position: fixed;*/
+    /*min-width: 300px;
+    right:30px;
+    top:100px;
+    height:auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;*/
+  }
+
+  .login-form
+  {
+    display:block;
+  }
+
+  /*
+  .create-form
+  {
+    top:45px;
+    z-index: 2;
+  }
+
+  .reset-form
+  {
+    z-index: 3;
+  }
+  */
+
+  .loginbtn,.joinbtn,.sendbtn
+  {
+    padding: 5px 10px;
+    background-color: black;
+    color: white;
+  }
+
+  .createbtn
+  {
+    padding: 5px 10px;
+    background-color: white;
+    color: black;
+  }
+
+  .close
+  {
+    /*position: absolute;*/
+    right: 0;
+    top: 0;
+    font-size: 30px;
+    font-weight: bold;
+    color: black;
+    cursor:pointer;
+    border:none;
+    background-color:transparent;
+  }
+
+  .close:hover, .close:focus
+  {
+    color: red;
+    cursor: pointer;
+  }
+
+  </style>
+</head>
+<body>
+
+  <!--
+  <div id="loginForm" class="login-form">
+    <form name="signup-form" class="login-content" method="post">
+      <p><span class="close" title="Close Modal" style="float:right" onclick="document.getElementById('loginForm').style.display='none'">&times;</span></p>
+      <p style="clear:both;font-size:15px">Please Login with your email address</p>
+      <p id="loginMsg" class="message" style="font-size:15px;color:red"></p>
+      <p> <label for="login_email">Email*: </label> </p>
+      <p> <input type = "email" id="login_email" name="email" placeholder="Email" required> </p>
+      <p> <label for="login_pwd">Password*: </label> </p>
+      <p> <input type = "password" id="login_pwd" name="pwd" placeholder = "Password" required> </p>
+      <p><input type="button" onclick="signUp()" class="loginbtn" name="login" value="LOGIN"></p>
+      <p style="text-align:right"><a onclick="document.getElementById('resetForm').style.display='block';document.getElementById('loginForm').style.display='none'" style="color:dodgerblue;font-size:10px">FORGOT PASSWORD</a></p>
+      <hr>
+      <p>New User?</p>
+      <p><button onclick="document.getElementById('createForm').style.display='block';document.getElementById('loginForm').style.display='none'" class="createbtn" style="width:auto;">CREATE AN ACCOUNT</button></p>
+    </form>
+  </div>
+-->
+
+  <div id="createForm" class="create-form">
+    <form name="register-form" class="create-content" method="post">
+      <!--<p><span class="close" title="Close Modal" style="float:right" onclick="document.getElementById('createForm').style.display='none'">&times;</span></p>-->
+      <p><span class="close" title="Close Modal" style="float:right" onclick="location.href='index.html'">&times;</span></p>
+      <p style="clear:both;font-size:15px">Please Fill in this form</p>
+      <p id="createMsg" class="message" style="font-size:15px;color:red"></p>
+      <p> <label for="create_firstname">First Name*: </label>
+          <input type = "text" id="create_firstname" name="firstname" placeholder="First Name" required> </p>
+      <p> <label for="create_lastname">Last Name*: </label>
+          <input type = "text" id="create_lastname" name="lastname" placeholder = "Last Name" required> </p>
+      <p> <label for="create_email">Email Address*: </label>
+          <input type = "email" id="create_email" name="email" placeholder="Email Address" required> </p>
+      <p> <label for="create_pwd">Password*: </label>
+          <input type = "password" id="create_pwd" name="pwd" placeholder = "Password" maxlength="10" required> </p>
+      <p> <label for="create_confirmPWD">Confirm Password*: </label>
+          <input type = "password" id="create_confirmPWD" name="confirm_pwd" placeholder = "Confirm Password" onkeyup="confirmPwd()" maxlength="10" required> </p>
+      <p> Coupon For: $<input type = "checkbox" id="coupon" name="coupon">1000</p>
+
+
+
+      <p><input type="button" onclick="register()" class="joinbtn" name="join" value="CREATE NOW"></p>
+    </form>
+  </div>
+
+  <!--
+  <div id="resetForm" class="reset-form">
+    <form name="resetPWD-form" class="reset-content" method="post">
+      <p><span class="close" title="Close Modal" style="float:right" onclick="location.href='index.html'">&times;</span></p>
+      <p style="clear:both;font-size:15px">Enter your email address below to have your password reset</p>
+      <p> <label for="send_email">Email Address*: </label> </p>
+      <p> <input type = "email" id="send_email" name="email" placeholder="Email Address" required> </p>
+      <p><input type="button" onclick="resetPWD()" class="sendbtn" name="send" value="SEND EMAIL"></p>
+    </form>
+
+  </div>
+-->
+
+  <!--
+  <div id="cusInfo" class="cus-info">
+
+    <h3>Welcome!</h3>
+
+    <p> <input type="button" class="cus_prof" name="cus_prof" value="Profile"></p>
+    <p> <input type="button" class="cus_od" name="cus_od" value="Order"></p>
+    <p> <input type="button" class="cus_inv" name="cus_inv" value="Invoice"></p>
+    <p> <input type="button" class="cus_lo" name="cus_lo" value="Log Out"></p>
+
+  </div>
+  -->
+<div id="test">
+
+</div>
+
+<script>
+
+function confirmPwd()
+{
+  var password = document.getElementById("create_pwd").value;
+  var confirmPassword = document.getElementById("create_confirmPWD").value;
+
+  if(password != confirmPassword)
+  {
+    document.getElementById("createMsg").innerHTML='Passwords do not match!';
+  }
+  else
+  {
+    document.getElementById("createMsg").innerHTML='Passwords match!';
+  }
+}
+
+function register()
+{
+  var bal = 0;
+
+  if(document.getElementById("coupon").checked)
+  {
+    bal = 1000;
+  }
+
+  const cus = {fName: document.forms["register-form"]["firstname"].value, lName: document.forms["register-form"]["lastname"].value,
+               email: document.forms["register-form"]["email"].value, pwd: document.forms["register-form"]["pwd"].value,
+               balance: bal
+              };
+  const cusJSON = JSON.stringify(cus);
+
+  var xhttp = new XMLHttpRequest();
+
+  xhttp.onreadystatechange = function()
+  {
+    if(this.readyState == 4 && this.status === 200)
+    {
+      //document.getElementById("createMsg").innerHTML=this.responseText;
+      //var result = document.getElementById("createMsg").innerHTML;
+      var result = this.responseText;
+
+      //if(this.responseText != "")
+
+      if(result == "1")
+      {
+        //document.getElementById("createForm").style.display="none";
+        //document.getElementById("loginForm").style.display="block";
+        alert("Register Successfully!");
+        document.location.href="index.html";
+      }
+      else
+      {
+        document.getElementById("createMsg").innerHTML="Error: Customer Exists";
+      }
+    }
+  };
+
+  //xhttp.open("GET","default.php");
+  //xhttp.send("x=" + cusJSON);
+  xhttp.open("GET","default.php?x=" + cusJSON,true);
+  xhttp.send();
+}
+
+function resetPWD()
+{
+  const cus = {email: document.forms["resetPWD-form"]["email"].value};
+  const cusJSON = JSON.stringify(cus);
+  var xhttp = new XMLHttpRequest();
+
+  xhttp.onreadystatechange = function()
+  {
+    if(this.readyState == 4 && this.status === 200)
+    {
+      document.getElementById("test").innerHTML=this.responseText;
+      //var obj = JSON.parse(this.responseText);
+    }
+  };
+  xhttp.open("GET","default.php?y=" + cusJSON,true);
+  xhttp.send();
+}
+
+function signUp()
+{
+  const cus = {email: document.forms["signup-form"]["email"].value,pwd: document.forms["signup-form"]["pwd"].value};
+  const cusJSON = JSON.stringify(cus);
+  var xhttp = new XMLHttpRequest();
+
+  xhttp.onreadystatechange = function()
+  {
+    if(this.readyState == 4 && this.status === 200)
+    {
+      var str= this.responseText;
+
+      var obj = JSON.parse(str);
+      //console.log(typeof(theStr2));
+
+      let text = "";
+
+      for(let x in obj)
+      {
+        //text+= obj[x].First_Name;
+        text= text + obj[x].First_Name + " " + obj[x].Last_Name;
+      }
+
+      //console.log(text);
+
+      //document.getElementById("client_name").innerHTML=text;
+
+      if(str == "Email Address is not correct." || str == "Password is not correct.")
+      {
+        document.getElementById("loginMsg").innerHTML = str;
+      }
+
+      document.getElementById("loginForm").style.display="none";
+      document.getElementById("cusInfo").style.display="block";
+
+    }
+  };
+  xhttp.open("GET","default.php?z=" + cusJSON,true);
+  xhttp.send();
+  //xhttp.open("GET","default.php");
+  //xhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+  //xhttp.send("z=" + cusJSON);
+
+}
+
+</script>
+
+</body>
+</html>

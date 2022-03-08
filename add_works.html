@@ -1,0 +1,116 @@
+<!--
+Add works into work table in the database
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title> Add Works </title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body { font-family: sans-serif;}
+
+    .container
+    {
+      position:relative;
+      width:500px;
+      height:400px;
+      top:50px;
+      left:30%;
+      background-color: grey;
+      text-align: center;
+    }
+    
+    .favorite
+    {
+      position: absolute;
+      right: 0;
+      top: 0;
+      font-size: 30px;
+      font-weight: bold;
+      background-color: transparent;
+      border:none;
+      color: black;
+    }
+
+    input[type=text]
+    {
+      width:auto;
+      height:auto;
+      display: table-cell;
+      border:none;
+    }
+
+    .lb
+    {
+      text-align: left;
+      width:30px;
+
+    }
+
+    .close
+    {
+      position: absolute;
+      right: 0;
+      top: 0;
+      font-size: 30px;
+      font-weight: bold;
+      color: black;
+    }
+
+    .close:hover, .close:focus
+    {
+      color: red;
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+<body>
+
+<div id="modal01" class="container">
+
+  <span class="close" title="Close Modal" onclick="closeButton()">&times;</span>
+
+  <form method="post" action="add_works.php">
+
+    <h3>Add Your Work to Gallery</h3>
+
+    <p>Please fill in this form to add your work.</p>
+
+    <p><label class="lb" for="wID">ID: <input type = "text" id="wID" name="wID" placeholder="Enter ID" maxlength="4" required> </label> </p>
+    <p><label class="lb" for="wName">Name: <input type = "text" id="wName" name="wName" placeholder="Enter Name" required> </label> </p>
+    <p>Category:
+        <input type = "radio" id="hk_tw" name="wCat" value="HK_TW" required><label for="hk_tw">HK/TW</label>
+        <input type = "radio" id="cm" name="wCat" value="CM"><label for="cm">CM</label>
+        <input type = "radio" id="jp_kr" name="wCat" value="JP_KR"><label for="jp_kr">JP/KR</label>
+        <input type = "radio" id="eu_usa" name="wCat" value="EU_USA"><label for="eu_usa">EU/USA</label>
+    </p>
+    <p><label class="lb" for="wPrice">Price: <input type = "text" id="wPrice" name="wPrice" placeholder="Enter Price" required> </label> </p>
+    <p><label class="lb" for="wQnty">Quantity: <input type = "text" id="wQnty" name="wQnty" placeholder="Enter Quantity" required> </label> </p>
+    <p>Size:
+        <input type = "radio" id="large" name="wSize" value="Large" required><label for="large">Large</label>
+        <input type = "radio" id="medium" name="wSize" value="Medium"><label for="medium">Medium</label>
+        <input type = "radio" id="small" name="wSize" value="Small"><label for="small">Small</label>
+    </p>
+    <input type="checkbox" name="favorite">Add To Favorite</input>
+
+    <p><input type="file" name="wImg" id="wImg" required></p>
+
+    <p>
+      <input type="submit" class="add_btn" name="add_to_work" value="Add to Work">
+      <input type="button" class="cancel_btn" name="cancel" value="Cancel" onclick="closeButton()">
+    </p>
+
+  </form>
+</div>
+
+<script>
+  function closeButton()
+  {
+    document.getElementById("modal01").style.display='none';
+  }
+</script>
+
+</body>
+</html>

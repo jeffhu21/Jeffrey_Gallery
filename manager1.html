@@ -1,0 +1,309 @@
+<!--
+Form for manager to do tasks
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title> Manager </title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body { font-family: sans-serif;
+           font-size:15px;}
+
+    #display_msg,#display_msg2,#display_msg3
+    {
+
+      color:red;
+    }
+
+    .container
+    {
+      position:relative;
+      width:600px;
+      height:400px;
+      /*top:50px;*/
+      bottom:10px;
+      left:30%;
+      padding-top: 20px;
+      /*padding-top: 20px;
+      padding-left: 200px;*/
+      background-color: #909090;
+      text-align: center;
+    }
+
+    .container>form
+    {
+      position:absolute;
+      width:100%;
+      height:auto;
+    }
+
+    .close
+    {
+      position: absolute;
+      right: 0;
+      top: 0;
+      font-size: 30px;
+      font-weight: bold;
+      color: black;
+    }
+
+    .close:hover, .close:focus
+    {
+      color: red;
+      cursor: pointer;
+    }
+
+    #add_works,#sch_works,#rm_works,#update_fd
+    {
+      display:none;
+    }
+
+    #display_img input[type=submit]
+    {
+      position:absolute;
+    }
+
+    #display_img
+    {
+      position:relative;
+    }
+
+    .container .img_txt
+    {
+      position:absolute;
+      left:1;
+      right:0;
+      top:0;
+    }
+
+    .uList
+    {
+      list-style-type:none;
+      position:relative;
+      left:25%;
+      width:300px;
+      height:auto;
+    }
+
+    .uList img
+    {
+      position:absolute;
+      left:0;
+      width:100%;
+    }
+
+    /*
+
+
+    .uList li
+    {
+      display:inline-block;
+      width:100%;
+      height:auto;
+    }
+
+    .top-left
+    {
+      position:absolute;
+      top:5px;
+      left:30%;
+    }
+
+    .top-center
+    {
+      position:absolute;
+      width:600px;
+      height:500px;
+    }
+    */
+
+    /*
+    .top-center img
+    {
+      position:absolute;
+      width:650px;
+
+    }
+    */
+
+    /*
+    .top-right input[type=button]
+    {
+      position:absolute;
+      top:0;
+      right:20%;
+
+      border:none;
+      background-color:transparent;
+      color:red;
+      font-size:50px;
+    }
+
+    span + img
+    {
+      top:0;
+      width:100%;
+      height:100%;
+    }
+    */
+
+
+
+    /*
+    #display_img input[type=submit]
+    {
+      position:absolute;
+
+    }
+    */
+
+  </style>
+</head>
+<body>
+
+  <div id="modal" class="container">
+      <span class="close" title="Close Modal" onclick="closeModalButton()">&times;</span>
+
+        <h3>Select</h3>
+
+        <p id="display_msg">Please select an action.</p>
+
+        <p> <input type="button" onclick="popUpForm('add_works')" class="add_works" name="add_works" value="Add Works"></p>
+        <p> <input type="button" onclick="popUpForm('sch_works')" class="rm_works" name="rm_works" value="Remove Works"></p>
+        <p> <input type="button" onclick="popUpForm('rm_works')" class="update_fd" name="update_fd" value="Update Front-Decoration"></p>
+        <p> <input type="button" class="prom_evnt" name="prom_evnt" value="Promotion Event"></p>
+        <p> <input type="button" class="find_works" name="find_works" value="Find Works"></p>
+
+  </div>
+
+  <div id="add_works" class="container">
+
+    <span class="close" title="Close Modal" onclick="closeButton('add_works')">&times;</span>
+
+    <form method="post" action="management.php">
+
+      <h3>Add Your Work to Gallery</h3>
+
+      <p id="display_msg2">Please fill in this form to add your work.</p>
+
+      <p><label for="wID">ID: <input type = "text" id="add_wID" name="wID" placeholder="Enter ID" maxlength="4" required> </label> </p>
+      <p><label for="wName">Name: <input type = "text" id="add_wName" name="wName" placeholder="Enter Name" required> </label> </p>
+      <p>Category:
+          <input type = "radio" id="hk_tw" name="wCat" value="HK_TW" required><label for="hk_tw">HK/TW</label>
+          <input type = "radio" id="cm" name="wCat" value="CM"><label for="cm">CM</label>
+          <input type = "radio" id="jp_kr" name="wCat" value="JP_KR"><label for="jp_kr">JP/KR</label>
+          <input type = "radio" id="eu_usa" name="wCat" value="EU_USA"><label for="eu_usa">EU/USA</label>
+      </p>
+      <p><label for="wPrice">Price: <input type = "text" id="add_wPrice" name="wPrice" placeholder="Enter Price" required> </label> </p>
+      <p><label for="wQnty">Quantity: <input type = "text" id="add_wQnty" name="wQnty" placeholder="Enter Quantity" required> </label> </p>
+      <p>Size:
+          <input type = "radio" id="large" name="wSize" value="Large" required><label for="large">Large</label>
+          <input type = "radio" id="medium" name="wSize" value="Medium"><label for="medium">Medium</label>
+          <input type = "radio" id="small" name="wSize" value="Small"><label for="small">Small</label>
+      </p>
+      <input type="checkbox" name="favorite">Add To Favorite
+
+      <p><input type="file" name="wImg" id="add_wImg"></p>
+
+      <p>
+        <input type="submit" class="add_btn" name="mng" value="AddWork">
+        <!--<button class="cancel_btn" name="cancel" value="Cancel" onclick="closeButton('add_works')">-->
+      </p>
+
+    </form>
+  </div>
+
+  <div id="sch_works" class="container">
+    <span class="close" title="Close Modal" onclick="closeButton('sch_works')">&times;</span>
+
+    <form method="post" action="management.php">
+      <h3>Remove Your Work from Gallery</h3>
+
+      <p  id="display_msg3">Please enter ID to remove your work.</p>
+
+      <p><label for="wID">ID: <input type = "text" id="rm_wID" name="wID" placeholder="Enter ID" maxlength="4"> </label>  <input type="submit" class="search_works" name="mng" value="Search"></p>
+      </form>
+  </div>
+
+  <div id="rm_works" class="container">
+      <div id="display_img" class="uList">
+
+        <!-- <div class="top-left">3333</div> -->
+          <!--<input type="text" name="hmng" value="3333">-->
+        <!--
+        <div class="top-center"><img src="All/Adam_Lambert.PNG" name="theImage" value="theImg" alt="1111" style="width:100%;height:auto"></div>
+        <div class="top-right"><input type="button" class="rm_btn" name="mng" value="-"></div>
+        -->
+
+        <img src="All/Adam_Lambert.PNG" name="theImage" value="theImg" alt="1111" style="width:100%;height:auto">
+        <div class="img_txt"><input type="button" class="rm_btn" name="mng" value="-"></div>
+
+          <!--<input type="button" class="rm_btn" name="mng" value="-">-->
+
+      </div>
+  </div>
+
+  <!--input type="image" src="All/Adam_Lambert.PNG" name="theImage"><input type="hidden" name="hmng" value="3333"><input id="3333" type="submit" class="rm_btn" name="mng" value="-"-->
+
+
+<!--
+<p>
+  <input type="submit" class="rm_btn" name="mng" value="RemoveWork">
+</p>
+-->
+
+
+  <div id="update_fd" class="container">
+
+    <span class="close" title="Close Modal" onclick="closeButton('update_fd')">&times;</span>
+
+    <form method="post" action="management.php">
+
+      <p> <input type="button" class="show_works" name="show_works" value="Show"></p>
+
+
+    </form>
+  </div>
+
+
+
+
+<script>
+  function removeID(rmID)
+  {
+    document.getElementById("display_img").innerHTML=" ";
+  }
+
+  function closeModalButton()
+  {
+    document.getElementById("modal").style.display='none';
+  }
+
+  function closeButton(divID)
+  {
+    //this.style.display="none";
+    document.getElementById(divID).style.display="none";
+    document.getElementById("modal").style.display='block';
+  }
+
+  function popUpForm(divID)
+  {
+    var con = document.getElementsByClassName("container");
+
+    for(var index = 0; index < con.length;index++)
+    {
+      con[index].style.display='none';
+    }
+    document.getElementById(divID).style.display="block";
+  }
+
+
+
+</script>
+
+
+
+</body>
+</html>

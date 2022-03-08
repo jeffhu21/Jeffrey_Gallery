@@ -1,0 +1,1713 @@
+<!--
+Online shopping webpage
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title> Jeff's Gallery </title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+
+  * {box-sizing: border-box;}
+  body { font-family: sans-serif;}
+
+  .tab01
+  {
+    text-align: right;
+    width: 100%;
+    background-color:grey;
+    opacity: 0.7;
+    margin-bottom:5px;
+  }
+
+  .tab01 a
+  {
+    color:black;
+    padding:2px;
+  }
+
+  .righttab a
+  {
+    color:black;
+  }
+
+  .tab01 a:hover,.lefttab a:hover
+  {
+    background-color: yellow;
+  }
+
+  .lefttab
+  {
+    float: left;
+    width: 78.5%;
+  }
+
+  .lefttab a
+  {
+    color:black;
+    font-weight: bold;
+    padding:2px;
+  }
+
+  .righttab
+  {
+    float:right;
+    /*width: 17.5%;*/
+    /*float: left;*/
+    width: 18.5%;
+    margin-bottom:5px;
+  }
+
+  .cart-btn, .login-btn
+  {
+    background-color: black;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+
+  .cart-btn:hover,.login-btn:hover
+  {
+    background-color: grey;
+  }
+
+  #badge
+  {
+    position: relative;
+    top: -5px;
+    right: -3px;
+    padding-top: 3px 3px;
+    height:auto;
+    width:auto;
+    font-size:10px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+    line-height: 5px;
+  }
+
+  .middle,.bottom,.copyright,.middle_content
+  {
+    content="";
+    clear:both;
+  }
+
+  .middle
+  {
+    /*position:relative;*/
+    height:60%;
+    width:100%;
+  }
+
+  /*
+  .middle_content
+  {
+    position:absolute;
+    display:block;
+    width:100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  */
+
+  .middle_content:not(:first-child),#right_summary
+  /*#main_container*/
+  {
+    display:none;
+  }
+
+  #default_container
+  {
+    /*position:absolute;*/
+    width:100%;
+    display:block;
+  }
+
+
+  #default_container img
+  {
+    margin-left:auto;
+    margin-right:auto;
+    width:40%;
+    height:60%;
+  }
+
+  .about
+  {
+    width:50%;
+    float: left;
+  }
+
+  .help
+  {
+    width: 40%;
+    float: left;
+  }
+
+  .follow
+  {
+    width:10%;
+    float: left;
+  }
+
+  .bars-content
+  {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+
+  /*.cus-info*/
+  #cusInfo
+  {
+    width:50px;
+  }
+
+  .bars-content a,#cusInfo a
+  {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .bars-content a:hover,#cusInfo a:hover
+  {
+    background-color: #f1f1f1
+  }
+
+
+  /*.login-form,.create-form,.reset-form,.cus-info*/
+  .login-form
+  {
+    padding-top:10px;
+    padding-left:15px;
+    display: none;
+    position: fixed;
+    background-color: #f9f9f9;
+    min-width: 300px;
+    right:30px;
+    top:100px;
+    height:auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+
+  /*
+  .create-form
+  {
+    top:45px;
+    z-index: 2;
+  }
+  */
+
+  #resetForm
+  {
+    z-index: 3;
+  }
+
+  /*.loginbtn,.joinbtn,.sendbtn*/
+  .loginbtn
+  {
+    padding: 5px 10px;
+    background-color: black;
+    color: white;
+  }
+
+
+  .createbtn
+  {
+    padding: 5px 10px;
+    background-color: white;
+    color: black;
+  }
+
+  #cusProf,#cusEdit
+  {
+    text-align:center;
+  }
+
+  .close
+  {
+    /*position: absolute;*/
+    right: 0;
+    top: 0;
+    font-size: 30px;
+    font-weight: bold;
+    color: black;
+    cursor:pointer;
+    border:none;
+    background-color:transparent;
+  }
+
+  .close:hover, .close:focus
+  {
+    color: red;
+    cursor: pointer;
+  }
+
+  .prev, .next
+  {
+    cursor: pointer;
+    position: absolute;
+
+    top: 40%;
+    width: auto;
+    padding: 30px;
+    margin-top: auto;
+
+    color: grey;
+    font-weight: bold;
+    font-size: 40px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+  }
+
+  .next
+  {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+  }
+
+  .prev:hover, .next:hover
+  {
+    background-color: rgba(0,0,0,0.8);
+    color:white;
+  }
+
+  #main_container .left_column
+  {
+    /*position:absolute;*/
+    background-color: grey;
+    float:left;
+    width:20%;
+  }
+
+  #main_container .left_column a
+  {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    display: block;
+    color: black;
+  }
+
+  #main_container .left_column a:hover
+  {
+    color: red;
+  }
+
+  .collection-container
+  {
+    width:100%;
+    background-color: #262626;
+    display: none;
+    text-align: center;
+  }
+
+  .collection-container a
+  {
+    color:white;
+  }
+
+  #main_container .right_column
+  {
+    float:left;
+    width:80%;
+    height:auto;
+  }
+
+  #main_container .right_column .column
+  {
+    display: grid;
+    grid-column-gap: 50px;
+    margin:10px;
+    float:left;
+    width:20%;
+
+  }
+
+  #main_container .right_column p
+  {
+    text-align: center;
+  }
+
+  .left_side
+  {
+    /*border: 2px solid red;*/
+    float:left;
+    width:70%;
+    height:auto;
+    margin:5px;
+  }
+
+  .right_side
+  {
+
+    /*border: 2px solid green;*/
+    float:left;
+    width:25%;
+    height:100%;
+  }
+
+  .img_small
+  {
+    /*border: 2px solid pink;*/
+    float:left;
+    width:30%;
+  }
+
+  .img_large
+  {
+    /*border: 2px solid dodgerblue;*/
+    float:right;
+    width:65%;
+  }
+
+  .img_row
+  {
+    /*border: 2px solid brown;*/
+    float:left;
+  }
+
+  /*
+  .img_row:after
+  {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  */
+  .selected_btn
+  {
+    border:none;
+    background-color:transparent;
+  }
+
+  .size-btn
+  {
+    opacity: 0.3;
+    border: none;
+    cursor: pointer;
+  }
+
+  .active, .size-btn:hover
+  {
+    opacity: 0.7;
+  }
+
+  .add_to_cart-btn,.checkout-btn
+  {
+    background-color: red;
+    color:white;
+    width:100%;
+    margin-bottom:5px;
+    margin-top:15px;
+    position:relative;
+    font-size:20px;
+    font-weight: bold;
+    border:none;
+    padding: 15px 32px;
+  }
+
+  .add_to_cart-btn:hover,.checkout-btn:hover
+  {
+    opacity: 0.7;
+  }
+
+  .cont_shop-btn
+  {
+    width:100%;
+    margin-bottom:5px;
+    margin-top:5px;
+    bottom:0;
+    position: relative;
+    font-size:21px;
+    font-weight: bold;
+    border:none;
+    padding: 15px 32px;
+  }
+
+  .cont_shop-btn:hover
+  {
+    opacity: 0.7;
+  }
+
+  #shipping_addr
+  {
+    text-align:center;
+  }
+
+  .left_items,.shipping_addr
+  {
+    /*border: 2px solid red;*/
+    width:60%;
+    float:left;
+    height:auto;
+  }
+
+  /*
+  .left_items, .checkout_form,.order_items:after
+  {
+    content:"";
+    clear:both;
+  }
+  */
+
+  .order_items
+  {
+    border: 2px solid blue;
+    margin-bottom:20px;
+    width:100%;
+
+  }
+
+  .item_record,.address_row,.items_row
+  {
+    /*border: 2px solid pink;*/
+    width:100%;
+    height:300px;
+    clear:both;
+  }
+
+
+  .left_image
+  {
+    /*border: 2px solid green;*/
+    float:left;
+    width: 45%;
+    margin-right:5px;
+  }
+
+  .right_details
+  {
+    /*border: 2px solid yellow;*/
+    float:left;
+    width: 50%;
+    height:100%;
+  }
+
+  .right_summary
+  {
+    /*border: 2px solid blue;*/
+    width:35%;
+    float:left;
+    text-align:center;
+  }
+
+
+
+  @media screen and (max-width: 600px)
+  {
+    .column
+    {
+      width:40%;
+    }
+  }
+
+  @media screen and (max-width: 400px)
+  {
+    .column
+    {
+      width:90%;
+    }
+  }
+
+  </style>
+</head>
+
+<body onload="loadDefaultImg();loadShoppingCart();getEmail()" onunload="saveCart();setEmail()">
+
+<!--Start of Top-->
+
+<div class="top">
+
+  <h1 style="text-align:center;">Jeff's Gallery</h1>
+
+  <!--Start of Top 1-->
+
+  <div class = "tab01">
+    <a href="#">United States</a>
+    <a href="#">Store Locator</a>
+    <a href="#">Help</a>
+  </div>
+
+  <!--Start of Top 2-->
+
+  <div class = "maintab">
+
+    <div class = "lefttab">
+      <i class="fa fa-bars" onclick="document.getElementById('id01').style.display='block'"></i>
+      <div id="id01" class="bars-content">
+        <p><span class="close" title="Close Modal" onclick="document.getElementById('id01').style.display='none'">&times;</span></p>
+        <a href="#">Global</a>
+        <a href="#">Career</a>
+        <a href="#">About</a>
+      </div>
+
+      <a href="#" onclick="insertImg(this)">HK_TW</a>
+      <a href="#" onclick="insertImg(this)">CM</a>
+      <a href="#" onclick="insertImg(this)">JP_KR</a>
+      <a href="#" onclick="insertImg(this)">EU_USA</a>
+    </div>
+
+    <div class = "righttab">
+      <input type="text" placeholder="Search.." name="search">
+      <button class="cart-btn" onclick="changeMiddleContent('cart_container')"><i class="fa fa-shopping-cart"></i><span id="badge"></span></button>
+      <button class="login-btn"><i class="fa fa-sign-in" onclick="openSignUp()"></i></button>
+      <!--<button class="login-btn"><i class="fa fa-sign-in" onclick="location.href='signin.html'"></i></button>-->
+      <!--<button class="login-btn"><i class="fa fa-sign-in" onclick="document.getElementById('signinForm').style.display='block'"></i></button>-->
+    </div>
+
+  </div>
+
+  <!--End of Top 2-->
+
+</div>
+
+<!--End of Top-->
+
+<!--Start of Middle-->
+<div id="myMiddle" class="middle">
+
+  <hr style="border: 1px solid #f1f1f1; margin-bottom: 25px;">
+
+
+  <div id="signinForm" class="login-form">
+    <form name="signup-form" class="login-content" method="post">
+      <p><span class="close" title="Close Modal" style="float:right" onclick="document.getElementById('signinForm').style.display='none'">&times;</span></p>
+      <p style="clear:both;font-size:15px">Please Login with your email address</p>
+      <p id="loginMsg" class="message" style="font-size:15px;color:red"></p>
+      <p> <label for="login_email">Email*: </label> </p>
+      <p> <input type = "email" id="login_email" name="email" placeholder="Email" required> </p>
+      <p> <label for="login_pwd">Password*: </label> </p>
+      <p> <input type = "password" id="login_pwd" name="pwd" placeholder = "Password" required> </p>
+      <p><input type="button" onclick="signUp()" class="loginbtn" name="login" value="LOGIN"></p>
+
+      <p style="text-align:left"><span class="remember"> <input type = "checkbox"  name="remember" id="remember_email">Keep me signed in </span></p>
+      <!--<p style="text-align:right"><a rel='prev' href='signin.html' target='_top'; style="color:dodgerblue;font-size:10px">FORGOT PASSWORD</a></p>-->
+      <p style="text-align:right">
+
+        <a onclick="document.getElementById('resetForm').style.display='block';document.getElementById('signinForm').style.display='none'" style="color:dodgerblue;font-size:10px">FORGOT PASSWORD</a>
+      </p>
+
+      <hr>
+      <p>New User?</p>
+      <!--<p><button class="createbtn" style="width:auto;">CREATE AN ACCOUNT</button></p>-->
+      <!--<p><button onclick="location.href='signin.html'" class="createbtn" style="width:auto;">CREATE AN ACCOUNT</button></p>-->
+      <p><button class="createbtn" style="width:auto;"><a href='signin.html' target='_parent' style="text-decoration:none;color:black">CREATE AN ACCOUNT</a> </button></p>
+    </form>
+  </div>
+
+  <!--
+  <div id="createForm" class="create-form">
+    <form class="create-content" action="default.php" method="post">
+      <p><span class="close" title="Close Modal" style="float:right" onclick="document.getElementById('createForm').style.display='none'">&times;</span></p>
+      <p style="clear:both;font-size:15px">Please Fill in this form</p>
+      <p id="msg" class="message" style="font-size:10px;color:red"></p>
+      <p> <label for="create_firstname">First Name*: </label> </p>
+      <p> <input type = "text" id="create_firstname" name="firstname" placeholder="First Name" required> </p>
+      <p> <label for="create_lastname">Last Name*: </label> </p>
+      <p> <input type = "text" id="create_lastname" name="lastname" placeholder = "Last Name" required> </p>
+      <p> <label for="create_email">Email Address*: </label> </p>
+      <p> <input type = "email" id="create_email" name="email" placeholder="Email Address" required> </p>
+      <p> <label for="create_pwd">Password*: </label> </p>
+      <p> <input type = "password" id="create_pwd" name="pwd" placeholder = "Password" required> </p>
+      <p> <label for="create_confirmPWD">Confirm Password*: </label> </p>
+      <p> <input type = "password" id="create_confirmPWD" name="confirm_pwd" placeholder = "Confirm Password" onkeyup="confirmPwd()" required> </p>
+      <p><input type="button" class="joinbtn" name="join" value="CREATE NOW"></p>
+    </form>
+  </div>
+  -->
+
+  <div id="resetForm" class="login-form">
+    <form class="reset-content" action="default.php" method="post">
+      <p><span class="close" title="Close Modal" style="float:right" onclick="document.getElementById('resetForm').style.display='none'">&times;</span></p>
+      <p style="clear:both;font-size:15px">Enter your email address below to have your password reset</p>
+      <p> <label for="send_email">Email Address*: </label> </p>
+      <p> <input type = "email" id="send_email" name="email" placeholder="Email Address" required> </p>
+      <p><input type="button" class="loginbtn" name="send" value="SEND EMAIL"></p>
+    </form>
+  </div>
+
+
+  <div id="cusInfo" class="login-form">
+
+    <p><span class="close" title="Close Modal" style="float:right" onclick="document.getElementById('cusInfo').style.display='none'">&times;</span></p>
+    <h3 style="clear:both;text-align:center" id="login_name"></h3>
+
+    <a href="#" onclick="changeMiddleContent('cusProf');document.getElementById('cusInfo').style.display='none'">Profile</a>
+    <a href="#">Order</a>
+    <a href="#">Invoice</a>
+    <a href="#" onclick="cusLogOut()">Log Out</a>
+
+  </div>
+
+  <!--Start of Default Content-->
+  <div id="default_container" class="middle_content">
+
+      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+  </div>
+
+    <!--Start of Main Content-->
+
+    <div id="main_container" class="middle_content">
+
+      <div class="left_column">
+
+        <a class="dropdown-btn" href="#">Collection <span id="changeIcon" style="float:right">&plus;</span></a>
+          <div class="collection-container">
+            <a href="#">No. 1</a>
+            <a href="#">No. 2</a>
+          </div>
+
+        <a href="#">New Arrivals</a>
+
+        <a href="#">Sale</a>
+
+        <a href="#">Best Sellers</a>
+
+        <a href="#">All Collections</a>
+
+      </div>
+
+      <div class="right_column" id="mc_rCol">
+
+      </div>
+    </div>
+
+    <div id="image_container" class="middle_content">
+
+        <div class="left_side">
+
+          <div class="img_row">
+
+            <div class="img_small">
+
+              <img>
+              <img>
+
+            </div>
+
+            <div class="img_large">
+              <img id="item_img">
+            </div>
+
+          </div>
+
+          <div class="des_row">
+            <p id="item_des"></p>
+          </div>
+
+        </div>
+
+        <div class="right_side">
+          <p>Product ID: <span id="item_id"></span></p>
+          <p id="item_name" style="font-weight: bold;font-size:30px"></p>
+          <p id="item_price" style="font-size:20px"></p>
+          <hr style="border: 1px solid #f1f1f1; margin-bottom: 25px;">
+          <p>
+            <label for="size">Size:<button name="selected_item_size;" id="selected_item_size" class="selected_btn"></button></label>
+          </p>
+          <div id="size-btns">
+
+            <button class="size-btn">Large</button>
+            <button class="size-btn">Medium</button>
+            <button class="size-btn">Small</button>
+
+          </div>
+          <hr style="border: 1px solid #f1f1f1; margin-bottom: 25px;">
+          <p><label for="qty">Qty:</label>
+            <select name="qty_list" id="qty_list">
+
+              <option selected>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+            </select>
+          </p>
+          <p>
+            <button class="add_to_cart-btn">ADD TO CART</button>
+          </p>
+
+          <!--
+          <p>
+          <button class="cont_shop-btn">CONTINUE SHOPPING</button>
+          </p>
+          -->
+
+        </div>
+
+    </div>
+
+    <div id="cart_container" class="middle_content">
+
+      <h3 style="text-align:left;">Shopping Cart</h3>
+
+      <div class="left_items" id="left_items">
+
+        <!--<div class="item_record">
+
+          <div class="left_image">-->
+            <!--<img src="" style="width:100%;height:300px">-->
+          <!--</div>-->
+
+          <div class="right_details">
+            <!--<p class="close" style="text-align:right" onclick="removeItem(this)">&times;</p>-->
+            <!--<p></p>--> <!--Name -->
+            <!--<p><span></span></p>--> <!--ID -->
+            <!--<p><span></span></p>--> <!--Size -->
+            <!--<p><span></span></p><!--Price -->
+            <!--<p> <select> <option> </option> </select> </p>--> <!--Quantity -->
+            <!--<p></p>--> <!--Subtotal -->
+            <!--<p></p>--> <!--Remove -->
+
+          <!--</div>-->
+        <!--</div>-->
+          </div>
+
+      </div>
+
+      <div class="right_summary" id="right_summary">
+
+        <div class="summary">
+
+          <p>Order Summary: <span id="numOfItem"></span> Item(s)</p>
+          <p>Item(s) Subtotal: $<span id="itemTotal"></span> </p>
+          <p>Tax: $<span id="itemTax"></span> </p>
+          <p>Order Total: $<span id="orderTotal"></span> </p>
+
+        </div>
+
+        <div class="summary_btn">
+
+          <button class="checkout-btn" onclick="checkOut()">CHECKOUT</button>
+
+          <!--<button class="cont_shop-btn" onclick="continueShopping(this)">CONTINUE SHOPPING</button>-->
+
+          <button class="cont_shop-btn" onclick="finishTask(this,'main_container')">CONTINUE SHOPPING</button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div id="payment" class="middle_content">
+
+      <h3>Shipping Address</h3>
+
+      <div class="left_items">
+
+        <div class="address_row">
+
+          <div class="shipping_addr" id="shipping_addr">
+
+            <p> <label for="checkout_name">Name: </label>
+                <input type = "text" id="checkout_name" name="checkout_name" placeholder="Name"> </p>
+            <p> <label for="checkout_address">Address*: </label>
+                <input type = "text" id="checkout_address" name="checkout_address" placeholder="Address" required> </p>
+            <p> <label for="checkout_PC">Postal Code*: </label>
+                <input type = "text" id="checkout_PC" name="checkout_PC" placeholder="Postal Code" pattern="[A-Za-z][0-9][A-Za-z] [0-9][A-Za-z][0-9]" required> </p>
+            <p> <label for="checkout_phone">Phone Number: </label>
+                <input type = "tel" id="checkout_phone" name="checkout_phone" placeholder="Phone Number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"> </p>
+
+            <!--<p><input type="button" class="loginbtn" name="make_payment" value="MAKE PAYMENT NOW"></p>-->
+          </div>
+
+        </div>
+
+        <div class="items_row">
+
+          <div class="order_items" id="order_items">
+
+            <!--
+            <div class="left_image">-->
+              <!--<img src="" style="width:50%;height:300px">-->
+            <!--</div>-->
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="right_summary" id="r_summary">
+
+        <div class="summary">
+          <!--
+          <p>Order Summary: <span id="numOfItem"></span> Item(s)</p>
+          <p>Item(s) Subtotal: $<span id="itemTotal"></span> </p>
+          <p>Tax: $<span id="itemTax"></span> </p>
+          <p>Order Total: $<span id="orderTotal"></span> </p>
+          -->
+        </div>
+
+        <div class="summary_btn">
+          <br>
+          <p>Balance: $<span id='cus_bal'></span></p>
+          <br>
+          <button class="checkout-btn" id="paybtn" onclick="makePayment()">MAKE PAYMENT NOW</button>
+          <button class="cont_shop-btn" onclick="finishTask(this,'main_container')">CONTINUE SHOPPING</button>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+    <div id="cusProf" class="middle_content">
+
+      <h3 style="clear:both;text-align:center">Profile</h3>
+
+      <p>
+        First Name: <span id="cus_fName"></span>
+        <input type="button" class="editbtn" name="edit_fName" value="EDIT">
+
+      </p>
+      <p>
+        Last Name: <span id="cus_lName"></span>
+        <input type="button" class="editbtn" name="edit_lName" value="EDIT">
+
+      </p>
+      <p>
+        Password:
+        <input type = "password" id="cus_pwd" style="border:none;outline:none" size="8" readonly=true>
+
+        <input type="button" class="editbtn" name="edit_pwd" value="EDIT">
+
+      </p>
+      <!--
+
+      <p><input type="button" onclick="changeMiddleContent('cusEdit')" class="loginbtn" name="cus_edit" value="EDIT"></p>
+      -->
+    </div>
+
+    <div id="cusEdit" class="middle_content">
+      <!--
+      <form name="update-form" class="update-content" method="post">
+        <p style="clear:both;font-size:15px">Please Update your Information</p>
+        <p id="updateMsg" class="message" style="font-size:10px;color:red"></p>
+        <p> <label for="update_firstname">First Name*: </label> </p>
+        <p> <input type = "text" id="update_firstname" name="firstname" placeholder="First Name" required> </p>
+        <p> <label for="update_lastname">Last Name*: </label> </p>
+        <p> <input type = "text" id="update_lastname" name="lastname" placeholder = "Last Name" required> </p>
+        <p> <label for="update_pwd">Password*: </label> </p>
+        <p> <input type = "password" id="update_pwd" name="pwd" placeholder = "Password" required> </p>
+        <p> <label for="update_confirmPWD">Confirm Password*: </label> </p>
+        <p> <input type = "password" id="update_confirmPWD" name="confirm_pwd" placeholder = "Confirm Password" onkeyup="confirmPwd()" required> </p>
+
+        <p><input type="button" class="loginbtn" name="cus_update" onclick="updateCus(this)" value="UPDATE"></p>
+      </form>
+      -->
+    </div>
+
+    <div id="cusOrder" class="middle_content">
+
+
+
+    </div>
+
+    <div id="cusInvoice" class="middle_content">
+
+
+
+    </div>
+
+
+</div>
+
+<!--End of Middle-->
+
+<!--Start of Bottom-->
+<div class="bottom">
+
+  <hr style="border: 1px solid black; margin-bottom: 25px;">
+
+  <div class="about">
+    <h4>About</h4>
+    <p>Company</p>
+    <p>Sustainablity</p>
+    <p>App</p>
+  </div>
+
+  <div class="help">
+    <h4>Help</h4>
+    <p>FAQ</p>
+    <p>Subscribe</p>
+    <p>Unsubscribe</p>
+    <p>Contact Us</p>
+  </div>
+
+  <div class="follow">
+    <h4>Follow Us</h4>
+    <i class="fa fa-facebook"></i>
+    <i class="fa fa-instagram"></i>
+    <i class="fa fa-pinterest"></i>
+    <i class="fa fa-youtube"></i>
+    <i class="fa fa-twitter"></i>
+  </div>
+
+</div>
+
+<!--End of Bottom-->
+
+<!--Start of Copyright-->
+<div class="copyright">
+
+  <hr style="border: 1px solid #f1f1f1; margin-bottom: 25px;">
+
+  <h6 style="text-align:center">&copy JEFF'S GALLERY. All rights reserved</h6>
+
+</div>
+
+<div id="test">
+
+</div>
+
+<!--End of Copyright-->
+
+<script>
+
+const maxQty = 10;
+
+const cus={};
+
+/*
+cus.cus_name = "";
+cus.cus_fName = "";
+cus.cus_lName = "";
+cus.cus_em = "";
+cus.cus_pwd = "";
+cus.cus_bal = 0;
+*/
+
+function confirmPwd()
+{
+  var password = document.getElementById("update_pwd").value;
+  var confirmPassword = document.getElementById("update_confirmPWD").value;
+
+  if(password != confirmPassword)
+  {
+    document.getElementById("updateMsg").innerHTML='Passwords do not match!';
+  }
+  else
+  {
+    document.getElementById("updateMsg").innerHTML='Passwords match!';
+  }
+}
+
+function checkOut()
+{
+  if(document.getElementById("login_name").innerHTML == "")
+  {
+    alert("LOGIN REQUIRED: Please login in.");
+  }
+  else
+  {
+    //document.querySelectorAll(".item_record").style.display='none';
+    //document.querySelectorAll(".right_details").style.display='none';
+    //document.getElementById("cart_container").style.display='none';
+    //document.getElementById("payment").style.display='block';
+    changeMiddleContent('payment');
+    addOrderItems();
+    addSummary();
+
+    //document.getElementById("left_header").innerHTML='Shipping Address';
+
+
+  }
+}
+
+function addOrderItems()
+{
+  var order_it = document.getElementById("order_items");
+
+  var elmnt = document.getElementsByClassName("item_record");
+
+  for(var i=0; i < elmnt.length;i++)
+  {
+    var cln = (elmnt[i].querySelector(".left_image")).cloneNode(true);
+    //alert(cln.className);
+    cln.style="margin-left:10px;margin-bottom:10px";
+    cln.style="padding: 10px 10px 10px 10px";
+    cln.style.width="150px";
+    cln.style.height="50%";
+    order_it.appendChild(cln);
+  }
+}
+
+function addSummary()
+{
+  var r_summary = document.getElementById("r_summary");
+
+  var cln = document.getElementById("right_summary").querySelector(".summary").cloneNode(true);
+
+  r_summary.insertBefore(cln,r_summary.querySelector('.summary_btn'));
+
+  /*
+  alert(cus.cus_em);
+  alert(cus.cus_bal);
+  */
+
+  document.getElementById("cus_bal").innerHTML = cus.cus_bal.toString();
+
+}
+
+function makePayment()
+{
+
+  updateBalance();
+
+}
+
+function updateBalance()
+{
+  var orderTotal = document.getElementById("orderTotal").innerHTML;
+
+  //cus.cus_bal = cus.cus_bal - parseFloat(orderTotal);
+  var cus_bal = document.getElementById("");
+
+
+
+}
+
+function insertOrders()
+{
+  //for(var index = 0;)
+}
+
+function openSignUp()
+{
+  //alert(cus.cus_em);
+  //alert(cus)
+
+  //if(document.getElementById("login_name").innerHTML != "")
+  //if(cus !== null && cus.cus_em !== "")
+  if(typeof cus.cus_em !== 'undefined' && cus.cus_em !== "")
+  {
+    document.getElementById('cusInfo').style.display='block';
+
+  }
+  else
+  {
+    document.getElementById('signinForm').style.display='block';
+  }
+}
+
+function signUp()
+{
+  const customer = {email: document.forms["signup-form"]["email"].value,pwd: document.forms["signup-form"]["pwd"].value};
+  const cusJSON = JSON.stringify(customer);
+  var xhttp = new XMLHttpRequest();
+
+  xhttp.onreadystatechange = function()
+  {
+    if(this.readyState == 4 && this.status === 200)
+    {
+      var str= this.responseText;
+
+      //console.log(str);
+      //console.log(typeof(str));
+      //alert(str);
+      var obj = JSON.parse(str);
+
+      //alert(obj);
+
+      if(typeof(obj) == 'object')
+      {
+        /*
+        let cus_name = "";
+        let cus_fName = "";
+        let cus_lName = "";
+        let cus_pwd = "";
+        let cus_bal = 0;
+        */
+
+
+        for(let x in obj)
+        {
+          //cus.cus_name= obj[x].First_Name + " " + obj[x].Last_Name;
+          cus.cus_fName= obj[x].First_Name;
+          cus.cus_lName= obj[x].Last_Name;
+          cus.cus_em = obj[x].Email_Address;
+          cus.cus_pwd= obj[x].Password;
+          cus.cus_bal= parseFloat(obj[x].Balance);
+        }
+
+        /*
+        alert(cus.cus_em);
+        alert(cus.cus_bal);
+        */
+
+        /*
+        cus.cus_fName= obj.First_Name;
+        cus.cus_lName= obj.Last_Name;
+        cus.cus_pwd= obj.Password;
+        cus.cus_bal= parseFloat(obj.Balance);
+        */
+
+        document.getElementById("signinForm").style.display="none";
+        document.getElementById("cusInfo").style.display="block";
+
+        //document.getElementById("login_name").innerHTML = cus.cus_name;
+        document.getElementById("cus_fName").innerHTML = cus.cus_fName;
+        document.getElementById("cus_lName").innerHTML = cus.cus_lName;
+        document.getElementById("login_name").innerHTML = document.getElementById("cus_fName").innerHTML + " " + document.getElementById("cus_lName").innerHTML;
+
+        //document.getElementById("cus_pwd").value = cus.cus_pwd;
+        //document.getElementById("cus_bal").innerHTML = cus.cus_bal.toString();
+
+      }
+      else
+      {
+        document.getElementById("loginMsg").innerHTML = obj;
+      }
+
+      //document.getElementById("cusInfo").style.display="block";
+
+    }
+  };
+  xhttp.open("GET","default.php?z=" + cusJSON,true);
+  xhttp.send();
+}
+
+function cusLogOut()
+{
+  document.getElementById('cusInfo').style.display='none';
+
+  cus.cus_fName= "";
+  cus.cus_lName= "";
+  cus.cus_em = "";
+  cus.cus_pwd= "";
+  cus.cus_bal= 0;
+
+  //alert(cus.cus_em);
+
+  document.getElementById('login_name').innerHTML = '';
+
+}
+
+function getEmail()
+{
+  document.getElementById("login_email").value = localStorage.getItem("saved_email");
+}
+
+function setEmail()
+{
+  if(document.getElementById("remember_email").checked)
+  {
+    if (typeof(Storage) !== "undefined")
+    {
+      localStorage.setItem("saved_email",document.getElementById("login_email").value);
+    }
+  }
+}
+
+/*
+function updateCus(ele)
+{
+  const cus = {fName: document.forms["update-form"]["firstname"].value, lName: document.forms["update-form"]["lastname"].value,
+               email: document.getElementById("cus_email").innerHTML, pwd: document.forms["update-form"]["pwd"].value};
+
+  const cusJSON = JSON.stringify(cus);
+
+  var xhttp = new XMLHttpRequest();
+
+  xhttp.onreadystatechange = function()
+  {
+    if(this.readyState == 4 && this.status === 200)
+    {
+      var result = this.responseText;
+      //console.log(result);
+
+      if(result == "1")
+      {
+        alert("Update Successfully!");
+        //document.location.href="index.html";
+        //updateSuccess(ele);
+        finishTask(ele,"default_container");
+
+
+      }
+      else
+      {
+        document.getElementById("createMsg").innerHTML="Update Failed!";
+      }
+
+    }
+  }
+
+  xhttp.open("GET","default.php?cus=" + cusJSON,true);
+  xhttp.send();
+
+}
+*/
+
+function loadDefaultImg()
+{
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function()
+    {
+      if(this.readyState == 4 && this.status === 200)
+      {
+        document.getElementById("default_container").innerHTML+=this.responseText;
+        showSlides(slideIndex);
+      }
+    };
+    xhttp.open("GET","default.php?fav_img=*",true);
+    xhttp.send();
+}
+
+var slideIndex = 1;
+
+function plusSlides(n)
+{
+  showSlides(slideIndex += n);
+}
+
+//Slide Default Images
+function showSlides(n)
+{
+  var default_header = document.getElementById("default_container");
+  var slides = default_header.getElementsByClassName("slide_images");
+  if (n > slides.length)
+  {
+    slideIndex = 1;
+  }
+  if (n < 1)
+  {
+    slideIndex = slides.length;
+  }
+  for (var i = 0; i < slides.length; i++)
+  {
+      slides[i].style.display = "none";
+  }
+  slides[slideIndex-1].style.display = "block";
+}
+
+
+function insertImg(ele)
+{
+  var xhttp = new XMLHttpRequest();
+
+  var cat = ele.innerHTML;
+
+  xhttp.onreadystatechange = function()
+  {
+    if(this.readyState == 4 && this.status === 200)
+    {
+      document.getElementById("mc_rCol").innerHTML=this.responseText;
+
+      changeMiddleContent("main_container");
+    }
+  };
+  xhttp.open("GET","default.php?category=" + cat,true);
+  xhttp.send();
+}
+
+function displayImg(ele)
+{
+  var ele_parent = ele.parentElement;
+  ele_p = ele_parent.getElementsByTagName('p');
+  var img_s = document.getElementsByClassName("img_small")[0];
+  img_s.innerHTML="";
+
+  var img_node = document.createElement("img");
+  img_node.src=ele.src;
+  img_node.style.width="30%";
+  img_node.style.height="30%";
+  img_s.appendChild(img_node);
+
+  var it_img = document.getElementById("item_img");
+  it_img.src=ele.src;
+  it_img.style.width="500px";
+  it_img.style.height="500px";
+
+  document.getElementById("item_des").innerHTML=ele.id;
+  document.getElementById("item_id").innerHTML=ele.id;
+
+  document.getElementById("item_name").innerHTML = ele_p[0].innerHTML;
+  document.getElementById("item_price").innerHTML = ele_p[1].innerHTML;
+
+  selectItemSize();
+
+  var add_btn = document.getElementsByClassName("add_to_cart-btn")[0];
+
+  add_btn.setAttribute("onclick","addToCart()");
+
+  changeMiddleContent("image_container");
+}
+
+function selectItemSize()
+{
+  var size_header = document.getElementById("size-btns");
+  var size_btns = size_header.getElementsByClassName("size-btn");
+
+  document.getElementById("selected_item_size").innerHTML = "";
+
+  for (var i = 0; i < size_btns.length; i++)
+  {
+    size_btns[i].addEventListener("click", function()
+    {
+      document.getElementById("selected_item_size").innerHTML = this.innerHTML;
+    });
+  }
+}
+
+function addToCart()
+{
+  if (document.getElementById("selected_item_size").innerHTML == "")
+  {
+    alert("Please Select the size.");
+  }
+  else
+  {
+    var i = hasItem();
+
+    if(i == -1)
+    {
+      var obj = {};
+      obj.src = document.getElementById("item_img").src;
+      obj.it_id = document.getElementById("item_id").innerHTML;
+      obj.it_name = document.getElementById("item_name").innerHTML;
+      obj.it_price = document.getElementById("item_price").innerHTML;
+      obj.it_size = document.getElementById("selected_item_size").innerHTML;
+      obj.it_qty = document.getElementById("qty_list").value;
+      addItem(obj);
+    }
+    else
+    {
+      var cart = document.getElementsByClassName("item_record");
+      var eQty=cart[i].getElementsByTagName("select")[0];
+      eQty.value = parseInt(eQty.value) + parseInt(document.getElementById("qty_list").value);
+      var eST = cart[i].querySelector(".spSubTotal");
+
+      var price = cart[i].querySelector(".spPrice").innerHTML.replace("$","");
+      var quantity = eQty.value;
+      var total = parseFloat(price)*parseInt(quantity);
+      eST.innerHTML = total.toFixed(2);
+
+      summaryItem();
+    }
+  }
+}
+
+function addItem(obj)
+{
+  document.getElementById("right_summary").style.display="block";
+
+  var left_it = document.getElementById("left_items");
+
+  var iRow = document.createElement("div");
+  iRow.setAttribute("class","item_record");
+  left_it.appendChild(iRow);
+
+  var lImg = document.createElement("div");
+  lImg.setAttribute("class","left_image");
+  iRow.appendChild(lImg);
+
+  var rDetails = document.createElement("div");
+  rDetails.setAttribute("class","right_details");
+  iRow.appendChild(rDetails);
+
+  var img_node = document.createElement("img");
+  img_node.src=obj.src;
+  //img_node.onclick="changeMiddleContent('image_container')";
+  //img_node.setAttribute("onclick","changeMiddleContent('image_container')");
+  img_node.style.width="100%";
+  img_node.style.height="300px";
+  lImg.appendChild(img_node);
+
+  var rmBtn = document.createElement("button");
+  rmBtn.setAttribute("class","close");
+  rmBtn.setAttribute("style","float:right");
+  rmBtn.setAttribute("onclick","removeItem(this)");
+  rmBtn.innerHTML='&times;';
+  rDetails.appendChild(rmBtn);
+
+  var dt_node = document.createElement("p");
+  dt_node.style="font-weight: bold;font-size:20px";
+  var span_Name = document.createElement("span");
+  span_Name.setAttribute("class","spName");
+  span_Name.innerHTML = obj.it_name;
+  dt_node.appendChild(span_Name);
+  rDetails.appendChild(dt_node);
+
+  var dt2_node = document.createElement("p");
+  dt2_node.innerHTML = "Product ID: ";
+  var span_ID = document.createElement("span");
+  span_ID.setAttribute("class","spID");
+  span_ID.innerHTML = obj.it_id;
+  dt2_node.appendChild(span_ID);
+  rDetails.appendChild(dt2_node);
+
+  var dt3_node = document.createElement("p");
+  dt3_node.innerHTML = "Size: ";
+  var span_Size = document.createElement("span");
+  span_Size.setAttribute("class","spSize");
+  span_Size.innerHTML = obj.it_size;
+  dt3_node.appendChild(span_Size);
+  rDetails.appendChild(dt3_node);
+
+  var dt4_node = document.createElement("p");
+  dt4_node.innerHTML = "Price: ";
+  var span_Price = document.createElement("span");
+  span_Price.setAttribute("class","spPrice");
+  span_Price.innerHTML = obj.it_price;
+  dt4_node.appendChild(span_Price);
+  rDetails.appendChild(dt4_node);
+
+  var dt5_node = document.createElement("p");
+  dt5_node.innerHTML = "Quantity: ";
+  select_node = document.createElement("select");
+  select_node.setAttribute("onchange","changeQty(this)");
+  dt5_node.appendChild(select_node);
+  for (var i = 1; i < maxQty; i++)
+  {
+    var qty_option = document.createElement("option");
+    if(obj.it_qty == i)
+    {
+      qty_option.selected = true;
+    }
+    qty_option.value = i;
+    qty_option.text = i;
+    select_node.appendChild(qty_option);
+  }
+  rDetails.appendChild(dt5_node);
+
+  var dt6_node = document.createElement("p");
+  var price = obj.it_price.replace("$", "");
+  var qty = obj.it_qty;
+  var subTotal = parseFloat(price)*parseInt(qty);
+  dt6_node.setAttribute("class","subTotal");
+  dt6_node.innerHTML = "Subtotal: $";
+  var span_SubTotal = document.createElement("span");
+  span_SubTotal.setAttribute("class","spSubTotal");
+  dt6_node.setAttribute("style","text-align:right");
+  span_SubTotal.innerHTML = subTotal.toFixed(2);
+  dt6_node.appendChild(span_SubTotal);
+  rDetails.appendChild(dt6_node);
+
+  var badge = parseInt(document.getElementById("badge").innerHTML);
+
+  if(document.getElementById("badge").innerHTML=="")
+  {
+    document.getElementById("badge").innerHTML=1;
+  }
+  else
+  {
+    document.getElementById("badge").innerHTML=parseInt(document.getElementById("badge").innerHTML) +1;
+  }
+  document.getElementById("numOfItem").innerHTML = document.getElementById("badge").innerHTML;
+
+  summaryItem();
+}
+
+function hasItem()
+{
+  var item_id=document.getElementById("item_id");
+  var item_size=document.getElementById("selected_item_size");
+  var cart = document.getElementsByClassName("item_record");
+
+  if(cart.length == 0)
+  {
+    return -1;
+  }
+  else
+  {
+    for(var i = 0; i < cart.length;i++)
+    {
+      if(cart[i].querySelector(".spID").innerHTML == item_id.innerHTML && cart[i].querySelector(".spSize").innerHTML == item_size.innerHTML)
+      {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+}
+
+function changeQty(ele)
+{
+  var ele_grandparent = ele.parentElement.parentElement;
+  var price = ele_grandparent.querySelector(".spPrice").innerHTML.replace("$","");
+  var qty = ele.value;
+  var subTotal = parseFloat(price)*parseInt(qty);
+  ele_grandparent.querySelector(".spSubTotal").innerHTML = subTotal.toFixed(2);
+
+  summaryItem();
+}
+
+function summaryItem()
+{
+  if(document.getElementById("itemTotal").innerHTML=="")
+  {
+    document.getElementById("itemTotal").innerHTML = 0;
+  }
+  var record = document.getElementsByClassName("item_record");
+  var v = 0;
+
+  for(var index=0; index < record.length;index++)
+  {
+    v = (parseFloat(v) + parseFloat(record[index].querySelector(".spSubTotal").innerHTML)).toFixed(2);
+  }
+  document.getElementById("itemTotal").innerHTML = v;
+  document.getElementById("itemTax").innerHTML=(0.13*parseFloat(document.getElementById("itemTotal").innerHTML)).toFixed(2);
+  document.getElementById("orderTotal").innerHTML=(parseFloat(document.getElementById("itemTax").innerHTML) + parseFloat(document.getElementById("itemTotal").innerHTML)).toFixed(2);
+}
+
+function removeItem(ele)
+{
+  var rmItem = ele.parentElement.parentElement;
+  rmItem.remove();
+
+  var badge = parseInt(document.getElementById("badge").innerHTML);
+
+  if(document.getElementById("badge").innerHTML==1)
+  {
+    document.getElementById("badge").innerHTML="";
+    document.getElementById("right_summary").style.display="none";
+  }
+  else
+  {
+    document.getElementById("badge").innerHTML=parseInt(document.getElementById("badge").innerHTML) -1;
+  }
+  document.getElementById("numOfItem").innerHTML = document.getElementById("badge").innerHTML;
+
+  summaryItem();
+}
+
+function finishTask(ele,container)
+{
+  /*
+  alert(cus.cus_em);
+  alert(cus.cus_bal);
+  */
+  ele.parentElement.parentElement.style='display:none';
+  //document.getElementById(container).style='display:block';
+  changeMiddleContent(container);
+}
+
+/*
+function updateSuccess(ele)
+{
+  ele.parentElement.parentElement.style='display:none';
+  document.getElementById('default_container').style='display:block';
+}
+
+function continueShopping(ele)
+{
+  ele.parentElement.parentElement.style='display:none';
+  document.getElementById('main_container').style='display:block';
+}
+*/
+
+function loadShoppingCart()
+{
+  document.getElementById("badge").innerHTML="";
+
+  var v;
+  var i = 0;
+  var itm = {};
+
+  v = localStorage.getItem("itemJSON[0]");
+
+  while(v!= null)
+  {
+    itm = JSON.parse(v);
+    addItem(itm);
+    i++;
+    v = localStorage.getItem("itemJSON["+i+"]");
+  }
+
+}
+
+function saveCart()
+{
+  if (typeof(Storage) !== "undefined")
+  {
+      localStorage.clear();
+
+      var record = document.getElementsByClassName("item_record");
+      const itm = {};
+      const itemJSON = [];
+
+      if(record.length != 0)
+      {
+          localStorage.setItem("cart_item_no",document.getElementById("badge").innerHTML);
+
+          for(var index=0; index < record.length;index++)
+          {
+            itm.src = record[index].getElementsByTagName("img")[0].src;
+            itm.it_name = record[index].querySelector(".spName").innerHTML;
+            itm.it_id = record[index].querySelector(".spID").innerHTML;
+            itm.it_price = record[index].querySelector(".spPrice").innerHTML;
+            itm.it_size = record[index].querySelector(".spSize").innerHTML;
+            itm.it_qty = record[index].getElementsByTagName("select")[0].value;
+            localStorage.setItem("itemJSON["+index+"]",JSON.stringify(itm));
+          }
+
+      }
+
+  }
+  else
+  {
+    alert("Warning: This browser does not support HTML5.");
+  }
+}
+
+function changeMiddleContent(img_id)
+{
+  document.getElementById("default_container").style.display="none";
+
+  var elem01 = document.getElementsByClassName("middle_content");
+  for(var i = 0; i < elem01.length; i++)
+  {
+    elem01[i].style.display="none";
+  }
+
+  document.getElementById(img_id).style.display="block";
+}
+
+
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++)
+{
+  dropdown[i].addEventListener("click", function()
+  {
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block")
+    {
+      dropdownContent.style.display = "none";
+      document.getElementById("changeIcon").innerHTML="&plus;";
+    }
+    else
+    {
+      dropdownContent.style.display = "block";
+      document.getElementById("changeIcon").innerHTML="&minus;";
+    }
+  });
+}
+
+</script>
+
+
+</body>
+</html>

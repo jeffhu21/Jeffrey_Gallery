@@ -1,0 +1,88 @@
+<!--
+Login form for admin and manager
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title> Admin </title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src ="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+
+  <!--
+  <h1>Jeff's Gallery</h1>
+
+  <h3>Management</h3>
+  -->
+
+  <div id="modal01" class="container bg-secondary">
+
+      <div class="clearfix"><span class="close">&times;</span></div>
+
+      <div class="d-flex justify-content-center">
+
+        <form method="post" action="admin.php">
+
+          <h3>Sign In</h3>
+
+          <p id="display_msg">Please sign in.</p>
+
+          <div class="form-group"> <label for="username">Username: <input type = "text" class="form-control" id="signin_username" name="a_name" placeholder="Enter Username" required> </label></div>
+
+          <div class="form-group"> <label for="pwd">Password: <input type = "password" class="form-control" id="signin_pwd" name="a_pwd" placeholder = "Enter Password" required> </label> </div>
+
+          <!--
+          <div class="form-check">
+            <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" value="">Remember Me</label>
+          </div>
+          -->
+
+          <p>
+            <span class=" " > <a style="color:black">Forgot password?</a> </span>
+          </p>
+
+          <p> <input type="submit" class=" "  name="login" value="OK"></p>
+
+        </form>
+
+      </div>
+
+  </div>
+
+<script>
+  function closeButton()
+  {
+    document.getElementById("modal01").style.display='none';
+  }
+
+  function login()
+  {
+    var xhttp = new XMLHttpRequest();
+
+    var username = document.getElementById('signin_username').value;
+    var password = document.getElementById('signin_pwd').value;
+
+    //document.getElementById("display_msg").innerHTML="Bosco";
+
+    xhttp.onreadystatechange = function()
+    {
+      if(this.readyState == 4 && this.status === 200)
+      {
+        document.getElementById("display_msg").innerHTML+=this.responseText;
+      }
+    };
+    xhttp.open("GET","login.php?username=" + username + "&password=" + password,true);
+    xhttp.send();
+  }
+
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,441 @@
+<!--
+Form for manager to do tasks
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title> Manager </title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body
+    {
+      font-family: sans-serif;
+      font-size:15px;
+      box-sizing:border-box;
+    }
+
+    .container
+    {
+      position:relative;
+      width:600px;
+      height:auto;
+      /*top:50px;*/
+      bottom:10px;
+      padding-bottom:50px;
+      left:30%;
+      padding-top: 30px;
+      /*padding-top: 20px;
+      padding-left: 200px;*/
+      background-color: #909090;
+      text-align: center;
+    }
+
+    /*.container>form*/
+    .form_container
+    {
+      position:absolute;
+      width:100%;
+      height:auto;
+
+
+      /*background-color: transparent;*/
+      background-color: #909090;
+    }
+
+    .close
+    {
+      position: absolute;
+      right: 0;
+      top: 0;
+      font-size: 30px;
+      font-weight: bold;
+      color: black;
+    }
+
+    .close:hover, .close:focus
+    {
+      color: red;
+      cursor: pointer;
+    }
+
+    .message
+    {
+
+      color:red;
+    }
+
+    .submit_btn
+    {
+
+    }
+
+    .container:not(:first-child)
+    {
+      display:none;
+    }
+
+    #display_img input[type=submit]
+    {
+      position:absolute;
+    }
+
+    #display_img
+    {
+      position:relative;
+    }
+
+
+    /*
+    #rmW_img
+    {
+    */
+      /*position:absolute;*/
+      /*margin-left:20%;*/
+      /*padding-bottom:20%;*/
+      /*width:50%;*/
+      /*height:50%;*/
+    /*
+    }
+    */
+
+    .column
+    {
+      float:left;
+      width:30%;
+      padding: 5px;
+    }
+
+    .row:after
+    {
+      content:"";
+      display:table;
+      clear:both;
+    }
+
+    .img_container
+    {
+      position:relative;
+      display:none;
+      height:auto;
+    }
+
+    #img_text
+    {
+      position:absolute;
+      bottom:15px;
+      left:15px;
+      color:red;
+      font-size:20px;
+    }
+
+    /*
+    .img_container .rm_btn
+    {
+      position:absolute;
+      top:10px;
+      right:15px;
+      color:white;
+    }
+    */
+
+    /*
+    #container .img_txt
+    {
+      position:absolute;
+      left:1;
+      right:0;
+      top:0;
+    }
+
+
+    .uList
+    {
+      list-style-type:none;
+      position:relative;
+      left:25%;
+      width:300px;
+      height:auto;
+    }
+
+    .uList img
+    {
+      position:absolute;
+      left:0;
+      width:100%;
+    }
+    */
+  </style>
+</head>
+<body>
+
+  <div id="modal" class="container">
+      <span class="close" title="Close Modal" onclick="closeModalButton()">&times;</span>
+
+        <h3>Select</h3>
+
+        <p id="main_msg" class="message">Please select an action.</p>
+
+        <p> <input type="button" onclick="popUpForm('add_works')" class="add_works" name="add_works" value="Add Works"></p>
+        <p> <input type="button" onclick="popUpForm('sch_works')" class="rm_works" name="rm_works" value="Remove Works"></p>
+        <p> <input type="button" onclick="popUpForm('update_fd')" class="update_fd" name="update_fd" value="Update Front-Decoration"></p>
+        <p> <input type="button" class="prom_evnt" name="prom_evnt" value="Promotion Event"></p>
+        <p> <input type="button" class="find_works" name="find_works" value="Find Works"></p>
+
+  </div>
+
+  <div id="add_works" class="container">
+
+    <span class="close" title="Close Modal" onclick="closeButton('add_works')">&times;</span>
+
+    <form method="post" class="form_container" action="management.php">
+
+      <h3>Add Your Work to Gallery</h3>
+
+      <p id="addW_msg" class="message">Please fill in this form to add your work.</p>
+
+      <p><label for="wID">ID: <input type = "text" id="add_wID" name="wID" placeholder="Enter ID" maxlength="4" required> </label> </p>
+      <p><label for="wName">Name: <input type = "text" id="add_wName" name="wName" placeholder="Enter Name" required> </label> </p>
+      <p>Category:
+          <input type = "radio" id="hk_tw" name="wCat" value="HK_TW" required><label for="hk_tw">HK/TW</label>
+          <input type = "radio" id="cm" name="wCat" value="CM"><label for="cm">CM</label>
+          <input type = "radio" id="jp_kr" name="wCat" value="JP_KR"><label for="jp_kr">JP/KR</label>
+          <input type = "radio" id="eu_usa" name="wCat" value="EU_USA"><label for="eu_usa">EU/USA</label>
+      </p>
+      <p><label for="wPrice">Price: <input type = "text" id="add_wPrice" name="wPrice" placeholder="Enter Price" required> </label> </p>
+      <p><label for="wQnty">Quantity: <input type = "text" id="add_wQnty" name="wQnty" placeholder="Enter Quantity" required> </label> </p>
+      <p>Size:
+          <input type = "radio" id="large" name="wSize" value="Large" required><label for="large">Large</label>
+          <input type = "radio" id="medium" name="wSize" value="Medium"><label for="medium">Medium</label>
+          <input type = "radio" id="small" name="wSize" value="Small"><label for="small">Small</label>
+      </p>
+      <input type="checkbox" name="favorite">Add To Favorite
+
+      <p><input type="file" name="wImg" id="add_wImg"></p>
+
+      <p>
+        <input type="submit" class="submit_btn" name="mng" value="AddWork">
+
+      </p>
+
+    </form>
+  </div>
+
+  <div id="sch_works" class="container">
+    <span class="close" title="Close Modal" onclick="closeButton('sch_works')">&times;</span>
+
+    <form method="post" class="form_container" action="management.php">
+      <h3>Search Your Work from Gallery</h3>
+
+      <p id="searchW_msg" class="message">Please enter ID to remove your work.</p>
+
+      <p>
+         <label for="wID">ID: <input type = "text" id="rm_wID" name="wID" placeholder="Enter ID" maxlength="4"></label>
+         <input type="submit" class="submit_btn" name="mng" value="Search">
+         <input type="submit" class="submit_btn" name="mng" value="Remove">
+      </p>
+
+      <div id="rmW_img"></div>
+
+    </form>
+
+  </div>
+
+  <div id="update_fd" class="container">
+
+    <span class="close" title="Close Modal" onclick="closeButton('update_fd')">&times;</span>
+
+    <form method="post" class="form_container" action="management.php">
+      <p  id="updateW_msg" class="message">Please show the works.</p>
+      <!--<p> <input type="button" class="show_works" name="show_works" onclick="showFavWorks()" value="Load All"></p>-->
+      <p> <input type="submit" class="submit_btn" name="mng" value="LoadAll"></p>
+      <!--<p  id="showAllWorks" class="message"></p>-->
+      <p> <label for="wID">ID: <input type = "text" id="addFav_wID" name="wID" placeholder="Enter ID" maxlength="4"></label></p>
+      <p> <input type="submit" class="add_favs" name="mng" value="AddFavorites"></p>
+
+  <!--</div>-->
+
+  <!--<div id="rm_works" class="container">-->
+
+      <!--<span class="close" title="Close Modal" onclick="closeButton('rm_works')">&times;</span>-->
+
+      <!--
+      <h3>Remove Your Work from Gallery</h3>
+
+      <p id="rmF_msg" class="message">Please pick one to remove favorite.</p>
+      -->
+
+      <div id="img_row" class="row">
+        <!--
+        <div class="column">
+          <img src="All/Adam_Lambert.PNG" name="theImage" value="theImg" id="1111" alt="1111" style="width:100%;height:auto" onclick="showFImg(this)">
+        </div>
+        <div class="column">
+          <img src="All/Adam_Lambert.PNG" name="theImage" value="theImg" id="1111" alt="1111" style="width:100%;height:auto" onclick="showFImg(this)">
+        </div>
+
+
+        <div class="column">
+          <img src="All/Adele_Adkins.PNG" name="theImage" value="theImg" id="2222" alt="2222" style="width:100%;height:auto" onclick="showFImg(this)">
+        </div>
+        <div class="column">
+          <img src="All/Owl_City.PNG" name="theImage" value="theImg" id="3333" alt="3333" style="width:100%;height:auto" onclick="showFImg(this)">
+        </div>
+        <div class="column">
+          <img src="All/Owl_City.PNG" name="theImage" value="theImg" id="3333" alt="3333" style="width:100%;height:auto" onclick="showFImg(this)">
+        </div>
+        -->
+      </div>
+
+      <div id="exp_img_con" class="img_container">
+        <!--
+        <span class="close" onclick="rmImg(this)">&minus;</span>
+        <img id="expandedImg" style="width:100%">
+        <div id="img_text"></div>
+        -->
+      </div>
+
+      </form>
+
+      <!--
+      <ul id = "fav_lst"></ul>
+
+      <li id="display_img" class="uList">
+
+        <img src="All/Adam_Lambert.PNG" name="theImage" value="theImg" alt="1111" style="width:100%;height:auto">
+        <span class="img_txt"><input type="button" class="rm_btn" name="mng" value="-"></span>
+
+
+      </li>
+      -->
+  </div>
+
+
+
+
+<script>
+
+  function showFImg(imgs)
+  {
+    var img_con = document.getElementById("exp_img_con");
+
+    img_con.innerHTML="";
+
+    var sp_node = document.createElement("span");
+    sp_node.setAttribute("class","close");
+    sp_node.setAttribute("onclick","rmImg(this)");
+    sp_node.innerHTML="&minus;";
+    img_con.appendChild(sp_node);
+
+    var img_node = document.createElement("img");
+    img_node.setAttribute("id","expandedImg");
+    img_node.src=imgs.src;
+    img_node.alt=imgs.id;
+    img_node.style.width="100%";
+    img_con.appendChild(img_node);
+
+    var txt_node = document.createElement("div");
+    txt_node.innerHTML=imgs.alt;
+    txt_node.setAttribute("id","img_text");
+    img_con.appendChild(txt_node);
+  }
+
+
+  function showFImg1(imgs)
+  {
+    var expandedImg = document.getElementById("expandedImg");
+    var imgText=document.getElementById("img_text");
+    expandedImg.src = imgs.src;
+    imgText.innerHTML = imgs.id;
+    //imgText.innerHTML = imgs.alt;
+
+    //expandedImg.id = imgs.id;
+    expandedImg.parentElement.style.display="block";
+  }
+
+  function rmImg(e)
+  {
+    e.parentElement.style.display="none";
+
+
+    //var imgText=document.getElementById("img_text");
+    //var imgID = imgText.innerHTML;
+    var imgID=document.getElementById("expandedImg").alt;
+
+    //var imgID = e.nextSibling.id;
+
+    document.getElementById(imgID).parentElement.style.display="none";
+
+    removeID(imgID);
+
+    //var parentE=document.getElementById(imgID).parentElement;
+    //document.getElementById("rmF_msg").innerHTML=imgText.innerHTML;
+
+    //document.getElementById(imgs.id);
+    //document.getElementById()
+  }
+
+  function showFavWorks()
+  {
+    var xhttp = new XMLHttpRequest();
+    var s ="All";
+
+    xhttp.onreadystatechange = function()
+    {
+      if(this.readyState == 4 && this.status === 200)
+      {
+
+        //document.getElementById("updateW_msg").innerHTML=this.responseText;
+
+
+        //showSlides(slideIndex);
+      }
+    };
+    xhttp.open("GET","management.php?s=" + s,true);
+    xhttp.send();
+  }
+
+  function removeID(rmID)
+  {
+    //document.getElementById("display_img").innerHTML=" ";
+
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function()
+    {
+      if(this.readyState == 4 && this.status === 200)
+      {
+        document.getElementById("searchW_msg").innerHTML+=this.responseText;
+      }
+    };
+    xhttp.open("GET","management.php?q=" + rmID,true);
+    xhttp.send();
+  }
+
+  function closeModalButton()
+  {
+    document.getElementById("modal").style.display='none';
+  }
+
+  function closeButton(divID)
+  {
+    //this.style.display="none";
+    document.getElementById(divID).style.display="none";
+    document.getElementById("modal").style.display='block';
+  }
+
+  function popUpForm(divID)
+  {
+    var con = document.getElementsByClassName("container");
+
+    for(var index = 0; index < con.length;index++)
+    {
+      con[index].style.display='none';
+    }
+    document.getElementById(divID).style.display="block";
+  }
+
+</script>
+
+</body>
+</html>
